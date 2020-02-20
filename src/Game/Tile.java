@@ -23,6 +23,7 @@ public class Tile {
             return new Color(0x776e65);
         else return new Color(0xf9f6f2);
     }
+
     public Color getTileColor() {
         switch (value){
             case 0: return new Color(0xcdc1b4);

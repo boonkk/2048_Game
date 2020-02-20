@@ -17,21 +17,12 @@ public class MoveFitness implements Comparable<MoveFitness> {
 
     @Override
     public int compareTo(MoveFitness o) {
-        if(this.numberOfEmptyTiles == o.numberOfEmptyTiles){
+        if( this.numberOfEmptyTiles == o.numberOfEmptyTiles ) {
             return Integer.compare(this.score, o.score);
         }
         return Integer.compare(this.numberOfEmptyTiles, o.numberOfEmptyTiles);
     }
-//            if( this.numberOfEmptyTiles >  ((MoveFitness) o).numberOfEmptyTiles )
-//                return 1;
-//            else if(this.numberOfEmptyTiles <  ((MoveFitness) o).numberOfEmptyTiles)
-//                return -1;
-//            else if(this.score > ((MoveFitness) o).score)
-//                return 1;
-//            else if (this.score < ((MoveFitness) o).score)
-//                return -1;
-//            else return 0;
-    }
+}
 
 
 

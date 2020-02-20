@@ -73,9 +73,8 @@ public class Model {
 
     private boolean consolidateTiles(Tile[] tiles) {
         int count = 0;
-
-
         int[] valuesBefore = new int[tiles.length];
+
         for(int i=0; i<tiles.length; i++)
             valuesBefore[i]=tiles[i].value;
 
@@ -89,7 +88,6 @@ public class Model {
         for(int i=0;i<tiles.length;i++)
             if(valuesBefore[i]!=tiles[i].value)
                 return true;
-
         return false;
     }
 
@@ -102,41 +100,32 @@ public class Model {
                 consolidateTiles(tiles);
                 score += tiles[i].value;
                 changed = true;
+
                 if( tiles[i].value > maxTile )
                     maxTile = tiles[i].value;
             }
         }
-
         return changed;
-
     }
 
     public void randomMove() {
         int n = ((int) (Math.random () * 100)) % 4;
         switch (n) {
-            case 0:
-                left();
-                break;
-            case 1:
-                right();
-                break;
-            case 2:
-                up();
-                break;
+            case 0: left();
+            case 1: right();
+            case 2: up();
             case 3:
                 down();
                 break;
         }
     }
     public void left() {
-        if (isSaveNeeded) {
+        if (isSaveNeeded)
             saveState(this.gameTiles);
-        }
         boolean isChanged = false;
         for (int i = 0; i < FIELD_WIDTH; i++) {
-            if (consolidateTiles(gameTiles[i]) | mergeTiles(gameTiles[i])) {
+            if (consolidateTiles(gameTiles[i]) | mergeTiles(gameTiles[i]))
                 isChanged = true;
-            }
         }
         isSaveNeeded = true;
         if (isChanged) addTile();
@@ -149,28 +138,24 @@ public class Model {
         left();
         rotate90CW();
         rotate90CW();
-
     }
 
     public void up() {
         saveState(gameTiles);
         rotate90CW();
+        rotate90CW();
+        rotate90CW();
         left();
         rotate90CW();
-        rotate90CW();
-
-        rotate90CW();
-
     }
 
     public void down() {
         saveState(gameTiles);
         rotate90CW();
-        rotate90CW();
-        rotate90CW();
         left();
         rotate90CW();
-
+        rotate90CW();
+        rotate90CW();
     }
 
     public void rotate90CW(){
@@ -195,34 +180,25 @@ public class Model {
 
     }
 
-    public boolean canMove()
+    public boolean canMove() // hard coding, todo
     {
-        for (int i = 0; i < gameTiles.length; i++)
-        {
-            for (int j = 0; j < gameTiles[i].length; j++)
-            {
-                if (j != gameTiles[i].length - 1)
-                {
-                    if (gameTiles[i][j].value == gameTiles[i][j + 1].value)
-                    {
+        for (int i = 0; i < gameTiles.length; i++) {
+            for (int j = 0; j < gameTiles[i].length; j++) {
+                if (j != gameTiles[i].length - 1) {
+                    if (gameTiles[i][j].value == gameTiles[i][j + 1].value) {
                         return true;
                     }
-
-                    if (gameTiles[i][j].value == 0 && gameTiles[i][j + 1].value != 0)
-                    {
+                    if (gameTiles[i][j].value == 0 && gameTiles[i][j + 1].value != 0) {
                         return true;
                     }
                 }
 
-                if (i != gameTiles.length - 1)
-                {
-                    if (gameTiles[i][j].value == gameTiles[i + 1][j].value)
-                    {
+                if (i != gameTiles.length - 1) {
+                    if (gameTiles[i][j].value == gameTiles[i + 1][j].value) {
                         return true;
                     }
 
-                    if (gameTiles[i][j].value == 0 && gameTiles[i + 1][j].value != 0)
-                    {
+                    if (gameTiles[i][j].value == 0 && gameTiles[i + 1][j].value != 0) {
                         return true;
                     }
                 }
